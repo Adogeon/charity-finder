@@ -1,10 +1,8 @@
-const BASE_URL = "https://api.globalgiving.org/api";
-const API_STRING = `api_key=${process.env.API_KEY}`;
+const axios = require('axios');
 
 const fetchData = async pathString => {
   try {
-    const response = await fetch(`${BASE_URL}${pathString}${API_STRING}`, {
-      method: "get",
+    const response = await axios.get(`${BASE_URL}${pathString}${API_STRING}`, {
       headers: {
         Accept: "application/json",
         "Content-type": "applicaiton/json"
@@ -17,6 +15,8 @@ const fetchData = async pathString => {
   }
 };
 
+const BASE_URL = "https://api.globalgiving.org/api";
+const API_STRING = `api_key=${process.env.API_KEY}`;
 const PROJECT_PATH = "/public/projectservice";
 const GET_FEATURE_PROJECT_SUM_PATH = "/featured/projects/summary";
 const GET_ALL_PROJECT_SUM_PATH = "/projects/summary";
