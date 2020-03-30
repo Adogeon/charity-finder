@@ -1,4 +1,8 @@
-const axios = require('axios');
+require("dotenv").config();
+
+const axios = require("axios");
+const BASE_URL = "https://api.globalgiving.org/api";
+const API_STRING = `api_key=${process.env.API_KEY}`;
 
 const fetchData = async pathString => {
   try {
@@ -8,18 +12,15 @@ const fetchData = async pathString => {
         "Content-type": "applicaiton/json"
       }
     });
-    const result = await response.json();
-    return result;
+    return response.data;
   } catch (error) {
     throw new Error(`Error when fetch all data: ${error}`);
   }
 };
 
-const BASE_URL = "https://api.globalgiving.org/api";
-const API_STRING = `api_key=${process.env.API_KEY}`;
 const PROJECT_PATH = "/public/projectservice";
 const GET_FEATURE_PROJECT_SUM_PATH = "/featured/projects/summary";
-const GET_ALL_PROJECT_SUM_PATH = "/projects/summary";
+const GET_ALL_PROJECT_SUM_PATH = "/all/projects/summary";
 
 module.exports.getAllProject = async () => {
   try {
