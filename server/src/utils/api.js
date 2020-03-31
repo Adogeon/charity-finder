@@ -9,7 +9,7 @@ const fetchData = async pathString => {
     const response = await axios.get(`${BASE_URL}${pathString}${API_STRING}`, {
       headers: {
         Accept: "application/json",
-        "Content-type": "applicaiton/json"
+        "Content-type": "application/json"
       }
     });
     return response.data;
@@ -18,16 +18,18 @@ const fetchData = async pathString => {
   }
 };
 
+const parser = require("./parser.js");
+
 const PROJECT_PATH = "/public/projectservice";
 const GET_FEATURE_PROJECT_SUM_PATH = "/featured/projects/summary";
-const GET_ALL_PROJECT_SUM_PATH = "/all/projects/summary";
+const GET_ALL_PROJECT_SUM_PATH = "/all/projects/active/summary";
 
 module.exports.getAllProject = async () => {
   try {
     const result = await fetchData(
       `${PROJECT_PATH}${GET_ALL_PROJECT_SUM_PATH}?`
     );
-    return result;
+    return parser.run(result);
   } catch (error) {
     console.log("Error when fetching all Project:" + error);
   }
@@ -38,7 +40,7 @@ module.exports.getFeatureProject = async () => {
     const result = await fetchData(
       `${PROJECT_PATH}${GET_FEATURE_PROJECT_SUM_PATH}?`
     );
-    return result;
+    return parser.run(result);
   } catch (error) {
     console.log("Error when fetching featured project:" + error);
   }
@@ -46,8 +48,8 @@ module.exports.getFeatureProject = async () => {
 
 module.exports.getSpecificProject = async id => {
   try {
-    const result = await fetchData(`${PROJECT_PATH}/projects/${id}/summary`);
-    return result;
+    const result = await fetchData(`${PROJECT_PATH}/projects/${id}/summary?`);
+    return parser.run(result);
   } catch (error) {
     console.log(`Error when fetching project ${id}: ${error}`);
   }

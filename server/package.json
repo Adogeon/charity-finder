@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon server.js",
     "run": "node server.js",
-    "test": "jest"
+    "test": "jest --watch"
   },
   "author": "",
   "license": "ISC",
