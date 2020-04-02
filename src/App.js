@@ -1,26 +1,19 @@
-import React, { useEffect, useState } from "react";
-import logo from "./logo.svg";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 import "./App.css";
+import HomePage from "./pages/HomePage";
 
 function App() {
-  const [msg, setMsg] = useState("");
-
-  const fetchMsg = async () => {
-    const response = await fetch("/api/test");
-    const result = await response.json();
-    setMsg(result);
-  };
-
-  useEffect(() => {
-    fetchMsg();
-  });
-
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-      </header>
-      <h1>{msg.Message}</h1>
+      <Router>
+        <Switch>
+          <Route path="/">
+            <HomePage></HomePage>
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }

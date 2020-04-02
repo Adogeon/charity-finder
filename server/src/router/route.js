@@ -22,7 +22,7 @@ router.get("/api/project/feature", async (req, res) => {
   }
 });
 
-router.get("/api/project:projectId", async (req, res) => {
+router.get("/api/project/:projectId", async (req, res) => {
   //get specific route
   try {
     const result = await getSpecificProject(req.params.projectId);
